@@ -2,7 +2,7 @@
 
 A tool to help you play WoW (and probably some other MMORPGs too)  
 
-TODO: example gif here
+<img src="_images/demo.gif" alt= "" width="480" height="270">
 
 ## Synopsys
 
@@ -11,13 +11,28 @@ buttons rapidly anymore to deal good DPS. Now you can just hold a button, and
 this tool will press it every `n` ms.  
 KeySmasher saves your hands and your keyboard and increases your DPS! For free!
 
-## Installation and setup
+# Installation and setup
+For now only systems with Linux with X11 are supported.
 
-`xinput --list`
-`xinput test`
-TODO
+## Dependencies:
+* `python 3`
+* `xdotool`
+* `xinput`
+* `xmodmap`
 
-## TODO
+### Arch
+``` shell script
+pacman -S xdotool xorg-xinput xorg-xmodmap python
+```
 
-## License
+## Installation
+Install dependencies and then add `keysmasher` script to your PATH.
+
+## Setup and run
+1. Get your keyboard id
+    * Run `xinput --list` and find your keyboard id (use `xinput test $id` to find the correct one)
+2. Run script!
+    * `keysmasher -d "delay in msecs" -i "keyboard id" -k "keys" "to" "smash"`
+
+# License
 All the code in this repository is released under the WTFPL license. Take a look at the [LICENSE](LICENSE) for more info.
