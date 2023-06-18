@@ -12,7 +12,7 @@ this tool will press it every `n` ms.
 KeySmasher saves your hands and your keyboard and increases your DPS! For free!
 
 # Installation and setup
-For now only systems with Linux with X11 are supported.
+For now only linux systems with X11 are supported.
 
 ## Dependencies:
 * `python 3`
