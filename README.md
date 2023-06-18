@@ -15,7 +15,7 @@ KeySmasher saves your hands and your keyboard and increases your DPS! For free!
 For now only linux systems with X11 are supported.
 
 ## Dependencies:
-* `python 3`
+* `python3`
 * `xdotool`
 * `xinput`
 * `xmodmap`
