@@ -83,6 +83,16 @@ class Smasher:
         return self._layout[scancode]
 
     @staticmethod
+    def get_active_window_title() -> str:
+        result = subprocess.run(
+            ['xdotool', 'getactivewindow', 'getwindowname'],
+            stdout=subprocess.PIPE,
+            check=False,
+        )
+
+        return result.stdout.decode().strip()
+
+    @staticmethod
     def press_key(key):
         subprocess.run(
             ['xdotool', 'key', key],
@@ -96,9 +106,30 @@ class Smasher:
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-d", "--delay", help="delay between keypresses in msecs", type=int, required=True)
-parser.add_argument("-i", "--device-id", help="id of keyboard device (use xinput --list)", type=int, required=True)
-parser.add_argument("-k", "--keys", nargs='+', help="keys to be smashed", required=True)
+parser.add_argument(
+    "-d", "--delay", help="delay between keypresses in msecs",
+    type=int,
+    required=True
+)
+
+parser.add_argument(
+    "-i", "--device-id", help="id of keyboard device (use xinput --list)",
+    type=int,
+    required=True
+)
+
+parser.add_argument(
+    "-k", "--keys", nargs='+', help="keys to be smashed",
+    required=True
+)
+
+
+parser.add_argument(
+    "-t", "--title", help="the title of the window in which the script will work",
+    type=str,
+    default='World of Warcraft',
+    required=False,
+)
 
 args = parser.parse_args()
 
@@ -106,7 +137,8 @@ smasher = Smasher(delay=args.delay / 1000, device_id=args.device_id)
 cooldown = args.delay / 2000
 
 while True:
-    for k in args.keys:
-        smasher.smash_key(k)
+    if smasher.get_active_window_title() == args.title:
+        for k in args.keys:
+            smasher.smash_key(k)
 
     sleep(cooldown)
